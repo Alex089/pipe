@@ -28,10 +28,4 @@ pipeline {
     }
 
   }
-  environment {
-    foob = 'bar'
-  }
-  parameters {
-    choice(name: 'UBUNTU', choices: ['18.10', '19.04'], description: 'Chose Ubuntu Release')
-  }
 }
