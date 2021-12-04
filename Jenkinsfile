@@ -19,5 +19,11 @@ pipeline {
       }
     }
 
+    stage('Archive') {
+      steps {
+        archiveArtifacts(artifacts: 'target/**/TEST*.xml', fingerprint: true)
+      }
+    }
+
   }
 }
