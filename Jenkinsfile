@@ -8,8 +8,32 @@ pipeline {
     }
 
     stage('Fluffy Test') {
-      steps {
-        sh './jenkins/test-all.sh'
+      parallel {
+        stage('Backend') {
+          steps {
+            sh './jenkins/test-all.sh'
+            junit 'target/surefire-sfsf'
+          }
+        }
+
+        stage('Frontend') {
+          steps {
+            sh './jenkins/test-frontend.sh'
+          }
+        }
+
+        stage('Performance') {
+          steps {
+            sh './jenkins/test-performance.sh'
+          }
+        }
+
+        stage('Static') {
+          steps {
+            sh './jenkins/test-static.sh'
+          }
+        }
+
       }
     }
 
