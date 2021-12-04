@@ -11,6 +11,7 @@ pipeline {
     stage('Fluffy Build') {
       steps {
         sh './jenkins/build.sh'
+        archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
       }
     }
 
