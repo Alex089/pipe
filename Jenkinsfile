@@ -1,38 +1,21 @@
 pipeline {
   agent any
   stages {
-    stage('Fluffy Test') {
-      parallel {
-        stage('Fluffy Test') {
-          steps {
-            sh 'sleep 3'
-            echo 'success'
-          }
-        }
-
-        stage('Test fluffy2') {
-          steps {
-            sleep 5
-          }
-        }
-
+    stage('Fluffy Build') {
+      steps {
+        sh './jenkins/build.sh'
       }
     }
 
-    stage('Fluffy Build') {
+    stage('Fluffy Test') {
       steps {
-        sh 'chmod +x app.sh && chmod +x jenkins/build.sh'
-        sh 'env'
-        sh './app.sh'
-        sh 'mkdir target'
-        sh './jenkins/build.sh'
-        archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
+        sh './jenkins/test-all.sh'
       }
     }
 
     stage('Fluffy Deploy') {
       steps {
-        echo 'placeholder deploy'
+        sh './jenkins/deploy.sh staging'
       }
     }
 
