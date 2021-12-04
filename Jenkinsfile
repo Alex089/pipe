@@ -2,9 +2,20 @@ pipeline {
   agent any
   stages {
     stage('Fluffy Test') {
-      steps {
-        sh 'sleep 3'
-        echo 'success'
+      parallel {
+        stage('Fluffy Test') {
+          steps {
+            sh 'sleep 3'
+            echo 'success'
+          }
+        }
+
+        stage('Test fluffy2') {
+          steps {
+            sleep 5
+          }
+        }
+
       }
     }
 
