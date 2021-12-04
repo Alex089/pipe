@@ -10,7 +10,7 @@ pipeline {
 
     stage('Fluffy Build') {
       steps {
-        echo 'another placehodler'
+        sh './jenkins/build.sh'
       }
     }
 
