@@ -10,6 +10,7 @@ pipeline {
 
     stage('Fluffy Build') {
       steps {
+        sh 'chmod +x app.sh && chmod +x jenkins/build.sh'
         sh './app.sh'
         sh './jenkins/build.sh'
         archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
