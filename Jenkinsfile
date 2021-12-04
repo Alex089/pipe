@@ -11,6 +11,7 @@ pipeline {
     stage('Fluffy Build') {
       steps {
         sh 'chmod +x app.sh && chmod +x jenkins/build.sh'
+        sh 'env'
         sh './app.sh'
         sh 'mkdir target'
         sh './jenkins/build.sh'
