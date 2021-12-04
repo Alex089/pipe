@@ -12,6 +12,7 @@ pipeline {
       steps {
         sh 'chmod +x app.sh && chmod +x jenkins/build.sh'
         sh './app.sh'
+        sh 'mkir target'
         sh './jenkins/build.sh'
         archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
       }
