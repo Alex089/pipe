@@ -4,7 +4,6 @@ pipeline {
     stage('Fluffy Build') {
       steps {
         sh 'chmod +x jenkins/build.sh'
-        archiveArtifacts 'jjj'
       }
     }
 
