@@ -4,6 +4,13 @@ pipeline {
     stage('Fluffy Build') {
       steps {
         sh './jenkins/build.sh'
+        archiveArtifacts 'jjj'
+      }
+    }
+
+    stage('Fluffy input') {
+      steps {
+        input(message: 'Hi, deploy', ok: 'Yes')
       }
     }
 
@@ -44,8 +51,11 @@ pipeline {
     }
 
     stage('Archive') {
+      agent any
       steps {
         archiveArtifacts(artifacts: 'target/**/TEST*.xml', fingerprint: true)
+        stash(name: 'Buzz Java 7', includes: 'target/**')
+        unstash 'Buzz Java 7'
       }
     }
 
